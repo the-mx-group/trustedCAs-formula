@@ -1,0 +1,18 @@
+{%- if grains.os_family == 'Debian' %}
+  {%- for CA in salt['pillar.get']('trustedCAs',{}).keys() %}
+/usr/local/share/ca-certificates/{{CA}}.crt:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - contents_pillar: trustedCAs:{{CA}}
+  {% endfor %}
+  {% if salt['pillar.get']('pki:trustedCAs',False) %}
+update-ca-certificates:
+  cmd.wait:
+    - watch:
+    {%- for CA in salt['pillar.get']('trustedCAs',{}).keys() %}
+        - file: /usr/local/share/ca-certificates/{{CA}}.crt
+    {%- endfor %}
+  {% endif %}
+{% endif %}
