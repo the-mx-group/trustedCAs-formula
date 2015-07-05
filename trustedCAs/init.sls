@@ -1,2 +1,2 @@
 include:
-  - CAs
+  - trustedCAs.CAs
