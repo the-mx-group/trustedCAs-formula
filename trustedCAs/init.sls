@@ -1,2 +1,2 @@
 include:
-  - pki.CAs
+  - CAs
