@@ -1,0 +1,10 @@
+{% set certs = salt['grains.filter_by']({
+    'Debian': {
+        'path': '/usr/local/share/ca-certificates',
+        'updatecommand': 'update-ca-certificates',
+    },
+    'RedHat': {
+       'path': '/etc/pki/ca-trust/source/anchors',
+       'updatecommand': 'update-ca-trust',
+    },
+}, merge=salt['pillar.get']('trustedCAs')) %}
