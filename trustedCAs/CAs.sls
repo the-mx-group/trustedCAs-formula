@@ -8,7 +8,7 @@
     - mode: 644
     - contents_pillar: trustedCAs:certs:{{ CA }}
 {% endfor %}
-{% if salt['pillar.get']('pki:trustedCAs',False) %}
+{% if salt['pillar.get']('trustedCAs:certs',False) %}
 update-ca-certificates:
   cmd.run:
     - name: {{ certs.updatecommand }}
