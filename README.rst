@@ -14,18 +14,22 @@ Pillar example
 --------------
 
 In your pillar, place the CAs PEM file content in a dict
-under ``trustedCAs`` and activate the ``pki:trustedCAs`` flag::
-
-  pki:
-    trustedCAs: true
+under ``trustedCAs:certs``::
 
   trustedCAs:
-    the_ca_name: |
-      -----BEGIN CERTIFICATE-----
-      MIIEIDCCAwigAwIBAgIQNE7VVyDV7exJ9C/ON9srbTANBgkqhkiG9w0BAQUFADCB
-      (... truncated ...)
-      jVaMaA==
-      -----END CERTIFICATE---
+    certs:
+      the_ca_name: |
+        -----BEGIN CERTIFICATE-----
+        MIIEIDCCAwigAwIBAgIQNE7VVyDV7exJ9C/ON9srbTANBgkqhkiG9w0BAQUFADCB
+        (... truncated ...)
+        jVaMaA==
+        -----END CERTIFICATE---
+
+If you need to override the destination path or the update command::
+
+  trustedCAs:
+    path: '/usr/local/share/my-cert-path'
+    updatecommand: 'update-certs-please'
 
 .. note:: removing a CA from the pillar does not make the system stop
           trusting it.
