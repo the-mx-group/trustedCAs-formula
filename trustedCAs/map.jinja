@@ -7,4 +7,9 @@
        'path': '/etc/pki/ca-trust/source/anchors',
        'updatecommand': 'update-ca-trust',
     },
+    'Arch': {
+       'path': '/etc/pki/ca-trust/source/anchors',
+       'updatecommand': 'update-ca-trust',
+    },
+    }
 }, merge=salt['pillar.get']('trustedCAs')) %}
