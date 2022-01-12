@@ -10,9 +10,9 @@
 {% endfor %}
 {% if salt['pillar.get']('pki:trustedCAs',False) %}
 update-ca-certificates:
-  cmd.wait:
+  cmd.run:
     - name: {{ certs.updatecommand }}
-    - watch:
+    - onchanges:
     {%- for CA in salt['pillar.get']('trustedCAs:certs',{}).keys() %}
         - file: {{ certs.path }}/{{ CA }}.crt
     {%- endfor %}
